@@ -1,0 +1,12 @@
+# 复制此文件为 .env 并填入你的API密钥
+
+# 基础配置
+PORT=3001
+UPLOAD_DIR=uploads
+MAX_FILE_SIZE=104857600
+NODE_ENV=development
+
+# 推荐配置：DeepSeek（国内用户首选）
+AI_PROVIDER=deepseek
+DEEPSEEK_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
+
