@@ -48,7 +48,7 @@ learnwise-backend/
 
 1. 安装依赖：
 ```bash
-npm install
+pip install -r backend/requirements.txt
 ```
 
 2. 配置环境变量：
@@ -64,9 +64,7 @@ cp env.example .env
 
 3. 启动后端服务器：
 ```bash
-npm start
-# 或开发模式
-npm run dev
+uvicorn backend.main:app --reload --host 0.0.0.0 --port 3001
 ```
 
 后端服务将在 `http://localhost:3001` 运行。
