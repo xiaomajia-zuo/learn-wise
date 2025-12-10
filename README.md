@@ -45,24 +45,32 @@ learnwise-backend/
 - AI API Key（推荐DeepSeek，国内用户无需代理）
 
 ### 后端设置
+1. 进入后端目录创建虚拟环境（可选但推荐）：
+```bash
+cd backend
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
-1. 安装依赖：
+2. 安装依赖：
 ```bash
 pip install -r backend/requirements.txt
 ```
 
-2. 配置环境变量：
-```bash
-# 复制配置文件
-cp env.example .env
-# 编辑 .env 文件，填入你的 AI API Key
+3. 配置backend/.env环境变量：
+```env
+AI_PROVIDER=openai
+OPENAI_API_KEY=sk-...
+OPENAI_MODEL=gpt-4o-mini
+UPLOAD_DIR=backend/uploads
+MAX_FILE_SIZE=209715200
 ```
 
 **国内用户推荐使用DeepSeek**（无需代理，价格便宜）：
 - 获取API Key：https://platform.deepseek.com/
 - 详细配置说明请查看：`国内AI服务配置指南.md`
 
-3. 启动后端服务器：
+4. 启动后端服务器：
 ```bash
 uvicorn backend.main:app --reload --host 0.0.0.0 --port 3001
 ```
