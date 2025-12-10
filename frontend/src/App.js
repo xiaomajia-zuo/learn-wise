@@ -33,7 +33,7 @@ function App() {
     setIsLoadingSummary(true);
     setSummaryError(null);
     try {
-      // 判断是否为文本/代码文件
+      // 判断是否为文本/代码文件（PDF和EPUB需要特殊处理，暂时不支持自动生成摘要）
       const ext = fileInfo.filename.split('.').pop().toLowerCase();
       const isTextFile = ['txt', 'md', 'js', 'py', 'java', 'cpp', 'c', 'html', 'css', 'json', 'xml'].includes(ext);
       

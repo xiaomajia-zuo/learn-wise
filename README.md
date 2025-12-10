@@ -119,8 +119,8 @@ npm start
 
 ## 支持的文件格式
 
-- **视频**：MP4, WebM, OGG
-- **文本**：TXT, Markdown
+- **视频**：MP4, WebM, OGG, MOV
+- **文本**：TXT, Markdown, PDF, EPUB
 - **代码**：JavaScript, Python, Java, C/C++, HTML, CSS, JSON, XML
 
 ## 技术栈
@@ -149,7 +149,7 @@ PORT=3001
 AI_PROVIDER=deepseek  # 可选：openai, deepseek, qwen, zhipu, moonshot
 DEEPSEEK_API_KEY=your_api_key_here
 UPLOAD_DIR=uploads
-MAX_FILE_SIZE=104857600
+MAX_FILE_SIZE=209715200  # 200MB (支持视频和PDF等大文件)
 ```
 
 **国内用户推荐配置**（使用DeepSeek，无需代理）：

@@ -12,11 +12,34 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // 中间件
-app.use(helmet());
-app.use(cors());
+// 配置helmet以允许PDF在iframe中显示
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      frameSrc: ["'self'", 'blob:', 'data:'],
+      objectSrc: ["'self'", 'blob:', 'data:'],
+      scriptSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+    },
+  },
+  crossOriginEmbedderPolicy: false, // 允许PDF在iframe中显示
+  crossOriginResourcePolicy: { policy: "cross-origin" }, // 允许跨域资源
+  frameguard: false, // 禁用X-Frame-Options，允许在iframe中嵌入（仅在开发环境，生产环境需要更严格的设置）
+}));
+
+// CORS配置 - 允许所有来源（开发环境）
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Range'],
+  exposedHeaders: ['Content-Length', 'Content-Range', 'Content-Type'],
+  credentials: false
+}));
 app.use(morgan('combined'));
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+// 增加请求体大小限制以支持大文件上传（200MB）
+app.use(express.json({ limit: '200mb' }));
+app.use(express.urlencoded({ extended: true, limit: '200mb' }));
 
 // 速率限制
 const limiter = rateLimit({

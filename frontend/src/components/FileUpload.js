@@ -11,6 +11,16 @@ function FileUpload({ onFileUpload }) {
     const file = e.target.files[0];
     if (!file) return;
 
+    // 检查文件大小（前端预检查，最大200MB）
+    const maxSize = 200 * 1024 * 1024; // 200MB
+    if (file.size > maxSize) {
+      alert(`文件过大！文件大小: ${(file.size / (1024 * 1024)).toFixed(2)}MB，最大允许: ${maxSize / (1024 * 1024)}MB`);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+      return;
+    }
+
     setUploading(true);
     const formData = new FormData();
     formData.append('file', file);
@@ -33,7 +43,15 @@ function FileUpload({ onFileUpload }) {
       }
     } catch (error) {
       console.error('上传失败:', error);
-      alert('文件上传失败: ' + (error.response?.data?.error || error.message));
+      
+      // 处理文件过大错误
+      if (error.response?.status === 413 || error.response?.data?.error === '文件过大') {
+        const maxSizeMB = error.response?.data?.maxSize || 200;
+        alert(`文件上传失败：文件过大\n\n文件大小超过了限制（最大 ${maxSizeMB}MB）\n\n建议：\n1. 压缩文件后重新上传\n2. 或选择较小的文件`);
+      } else {
+        const errorMsg = error.response?.data?.message || error.response?.data?.error || error.message;
+        alert('文件上传失败: ' + errorMsg);
+      }
     } finally {
       setUploading(false);
       if (fileInputRef.current) {
@@ -49,7 +67,7 @@ function FileUpload({ onFileUpload }) {
         type="file"
         id="file-input"
         onChange={handleFileSelect}
-        accept="video/*,text/*,.js,.py,.java,.cpp,.c,.html,.css,.md,.json,.xml"
+        accept="video/*,text/*,.js,.py,.java,.cpp,.c,.html,.css,.md,.json,.xml,.pdf,.epub,.mov"
         style={{ display: 'none' }}
       />
       <label

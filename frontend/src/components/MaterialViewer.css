@@ -17,6 +17,96 @@
   max-height: 100%;
 }
 
+.pdf-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #f5f5f5;
+}
+
+.pdf-viewer {
+  width: 100%;
+  height: calc(100% - 50px); /* 为操作按钮留出空间 */
+  border: none;
+  flex: 1;
+  min-height: 0;
+  background-color: white;
+}
+
+/* iframe标签样式 */
+.pdf-container iframe {
+  width: 100%;
+  height: calc(100% - 50px);
+  border: none;
+  display: block;
+}
+
+/* embed标签样式 */
+.pdf-container embed {
+  width: 100%;
+  height: calc(100% - 50px);
+  border: none;
+  display: block;
+}
+
+/* object标签样式 */
+.pdf-container object {
+  width: 100%;
+  height: calc(100% - 50px);
+  border: none;
+  display: block;
+}
+
+.epub-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  height: 100%;
+}
+
+.epub-notice {
+  text-align: center;
+  max-width: 500px;
+  padding: 2rem;
+  background-color: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+}
+
+.epub-notice p {
+  margin: 0.5rem 0;
+  color: #856404;
+}
+
+.epub-notice ul {
+  text-align: left;
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.epub-notice li {
+  margin: 0.5rem 0;
+  color: #856404;
+}
+
+.download-button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #667eea;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+
+.download-button:hover {
+  background-color: #5568d3;
+}
+
 .markdown-content {
   line-height: 1.6;
   color: #333;
